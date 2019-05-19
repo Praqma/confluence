@@ -1,4 +1,4 @@
-# Atlassian Software in Kubernetes - Confluence
+# Atlassian Software in Kubernetes (ASK) - Confluence
 
 This respository is a component of **[ASK](https://www.praqma.com/services/ask/) Atlassian Software in Kubernetes** ; and holds program-code to create Docker image for Confluence Software (not Confluence Core). 
 
