@@ -1,0 +1,14 @@
+# install4j response file for Confluence
+# Response file location: /opt/atlassian/confluence/.install4j/response.varfile
+
+launch.application$Boolean=true
+rmiPort$Long=8000
+app.install.service$Boolean=true
+# existingInstallationDir=/usr/local/Confluence
+sys.confirmedUpdateInstallationString=false
+sys.languageId=en
+sys.installationDir=/opt/atlassian/confluence
+app.confHome=/var/atlassian/application-data/confluence
+executeLauncherAction$Boolean=true
+httpPort$Long=8090
+portChoice=default

@@ -1,0 +1,4 @@
+# This file should contain list of plugin IDs each on a new line.
+# Comments and empty lines are ignored
+
+com.atlassian.upm.atlassian-universal-plugin-manager-plugin
