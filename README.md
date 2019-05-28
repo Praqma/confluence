@@ -46,7 +46,7 @@ docker run \
   --env X_PROXY_PORT="8090" \
   --env X_PROXY_SCHEME="https" \
   --detach \
-  praqma/confluence-server:6.15.4
+  praqma/confluence:6.15.4
 ```
 
 **Note:** When setting up Confluence behind a (GCE/AWS/other) proxy/load balancer, make sure to setup proxy/load-balancer timeouts to large values such as 300 secs or more. (The default is set to 60 secs). It is **very** important to setup these timeouts, as Confluence (and other atlassian software) can take significant time setting up initial database. Smaller timeouts will panic Confluence setup process and it will terminate.
