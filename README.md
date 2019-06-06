@@ -124,6 +124,20 @@ The following environment variables can be set when building your docker image.
 | X_CONTEXT_PATH | The context path, if any. Best to leave blank. (This was formerly X_PATH. ) | |
 
 
+## Get newest version from Atlassian
+
+You can use Curl and jq to get the latest version og download link for the installed used in this repository. It makes it easy when you need to build a newer image.
+```
+curl -s https://my.atlassian.com/download/feeds/current/confluence.json | sed 's\downloads(\\' | sed s'/.$//' | jq -r '.[] | select(.platform=="Unix") | "Url:" + .zipUrl, "Version:" + .version, "Edition:" + .edition'
+```
+Output :
+```
+Url:https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-6.15.4-x64.bin
+Version:6.15.4
+Edition:Standard
+
+```
+
 ## Linter
 
 You can use a linter that analyze source code to flag programming errors, bugs, stylistic errors, and suspicious constructs. There is [dockerlinter](https://github.com/RedCoolBeans/dockerlint) , which does this quite easily.
