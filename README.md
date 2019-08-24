@@ -46,7 +46,7 @@ docker run \
   --env X_PROXY_PORT="8090" \
   --env X_PROXY_SCHEME="https" \
   --detach \
-  praqma/confluence:6.15.4
+  praqma/confluence:6.15.7
 ```
 
 **Note:** When setting up Confluence behind a (GCE/AWS/other) proxy/load balancer, make sure to setup proxy/load-balancer timeouts to large values such as 300 secs or more. (The default is set to 60 secs). It is **very** important to setup these timeouts, as Confluence (and other atlassian software) can take significant time setting up initial database. Smaller timeouts will panic Confluence setup process and it will terminate.
@@ -108,7 +108,7 @@ The following environment variables can be set when building your docker image.
 
 | Env name | Description                                                                                                                                                                                                                                                                                                        | Defaults                              |
 |------------------------------ |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     |---------------------------------      |
-| CONFLUENCE_VERSION                  | The version number which is part of the name of the confluence software bin/tarball/zip.                                                                                                                                                                                                                                    | 6.15.4                                 |
+| CONFLUENCE_VERSION                  | The version number which is part of the name of the confluence software bin/tarball/zip.                                                                                                                                                                                                                                    | 6.15.7                                 |
 | DATACENTER_MODE               | This needs to be set to 'true' if you want to setup Confluence in a data-center mode. Need different lincense for this                                                                                                                                                                                                      | false                                 |
 | CONFLUENCE_DATACENTER_SHARE         | It needs to be a shared location, which multiple confluence instances can write to. This location will most probably be an NFS share, and should exist on the file system.  If it does not exist, then it will be created and chown to the confluence OS user.  NB: For this to work, DATACENTER_MODE should be set to true.      | /var/atlassian/confluence-datacenter        |
 | TZ_FILE                       | Timezone. Set the path of the correct zone you want to use for your container. Can be set at runtime as well                                                                                                                                                                                                          | /usr/share/zoneinfo/Europe/Oslo       |
@@ -133,7 +133,7 @@ curl -s https://my.atlassian.com/download/feeds/current/confluence.json | sed 's
 Output :
 ```
 Url:https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-6.15.4-x64.bin
-Version:6.15.4
+Version:6.15.7
 Edition:Standard
 
 ```
