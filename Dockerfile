@@ -210,7 +210,7 @@ ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/confluence
 RUN  echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/sysconfig/i18n \
   && echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/locale.conf \
   && yum -y install xmlstarlet findutils which gzip hostname procps iputils bind-utils \
-                    iproute jq graphviz graphviz-gd dejavu-sans-fonts \
+                    iproute jq graphviz graphviz-gd dejavu-sans-fonts busybox \
   && sync \
   && yum -y clean all \
   && ln -sf ${TZ_FILE} /etc/localtime \
