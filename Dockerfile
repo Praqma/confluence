@@ -1,4 +1,4 @@
-FROM fedora:29
+FROM fedora:30
 
 LABEL maintainer="kaz@praqma.net heh@praqma.net"
 
@@ -28,7 +28,8 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # CONFLUENCE_VERSION:
 # ------------------
 # The value for CONFLUENCE_VERSION should be a version number, which is part of the name of the confluence software bin/tarball/zip.
-ENV CONFLUENCE_VERSION 6.15.4
+# ENV CONFLUENCE_VERSION 6.15.4
+ENV CONFLUENCE_VERSION 7.0.2
 
 # OS_USERNAME:
 # -----------
@@ -177,6 +178,8 @@ ENV CONFLUENCE_DATACENTER_SHARE /mnt/shared
 # ------------------------
 # * Reference: https://confluence.atlassian.com/confluence064/installing-confluence-on-linux-720411834.html
 # * Confluence response file is used for unattended installation using bin installer.
+# * On a fresh installation, the response.varfile is found under: /opt/atlassian/confluence/.install4j/response.varfile
+
 COPY confluence-response.varfile /tmp/
 
 # We need the following in the container image:
@@ -201,14 +204,19 @@ COPY confluence-response.varfile /tmp/
 # The silly syncs are for Dockerhub to process this properly.
 # The fonts are added because AdoptJDK/JRE does not contain fonts and Confluence complaints about it.
 
+# ENV CONFLUENCE_DOWNLOAD_LOCATION https://www.atlassian.com/software/confluence/downloads/binary
+ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/confluence
+
 RUN  echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/sysconfig/i18n \
   && echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/locale.conf \
-  && yum -y install xmlstarlet findutils which gzip hostname procps iputils bind-utils iproute jq graphviz graphviz-gd dejavu-sans-fonts \
+  && yum -y install xmlstarlet findutils which gzip hostname procps iputils bind-utils \
+                    iproute jq graphviz graphviz-gd dejavu-sans-fonts \
   && sync \
   && yum -y clean all \
   && ln -sf ${TZ_FILE} /etc/localtime \
-  && echo "Downloading Confluence ${CONFLUENCE_VERSION}" \
-  && curl -# -L -O https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-${CONFLUENCE_VERSION}-x64.bin \
+  && echo "Downloading Confluence ( ${CONFLUENCE_VERSION} ) from:" \
+  && echo "Download location:  ${CONFLUENCE_DOWNLOAD_LOCATION}/atlassian-confluence-${CONFLUENCE_VERSION}-x64.bin " \
+  && curl -# -L -O ${CONFLUENCE_DOWNLOAD_LOCATION}/atlassian-confluence-${CONFLUENCE_VERSION}-x64.bin \
   && sync \
   && chmod +x ./atlassian-confluence-${CONFLUENCE_VERSION}-x64.bin \
   && sync \
@@ -289,7 +297,7 @@ CMD ["/opt/atlassian/confluence/bin/start-confluence.sh", "-fg"]
 
 # Build this image manually:
 # =========================
-# docker build -t test/confluence-server:7.8.0-test .
-# docker push test/confluence-server:7.8.0-test
+# docker build -t test/confluence-server:7.0.0-test .
+# docker push test/confluence-server:7.0.0-test
 
 # Check build-instructions.md for instructions for automated builds.
