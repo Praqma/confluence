@@ -1,14 +1,31 @@
-# install4j response file for Confluence
+# install4j response file for Confluence 7.0.2
 # Response file location: /opt/atlassian/confluence/.install4j/response.varfile
+# How to customize reponse file: https://confluence.atlassian.com/doc/unattended-installation-838416261.html
 
-launch.application$Boolean=true
-rmiPort$Long=8000
-app.install.service$Boolean=true
+
+# The existingInstallationDir does not need to be enabled on container based systems
+# It is set to /usr/local/Confluence by default, where Confluence is usually "not" installed.
+# I have disabled it - Kamran
 # existingInstallationDir=/usr/local/Confluence
+
+app.install.service$Boolean=true
+launch.application$Boolean=true
+sys.adminRights$Boolean=true
 sys.confirmedUpdateInstallationString=false
 sys.languageId=en
 sys.installationDir=/opt/atlassian/confluence
 app.confHome=/var/atlassian/application-data/confluence
-executeLauncherAction$Boolean=true
 httpPort$Long=8090
+rmiPort$Long=8000
 portChoice=default
+
+
+# Note: The following directives were present in Confluence 6.x.x but not found in 7.x.x
+# I have kept them (in disabled state) - for reference. - Kamran
+# executeLauncherAction$Boolean=true
+# It is probably replaced with "launch.application$Boolean=true"
+
+
+
+
+
