@@ -2,18 +2,17 @@
 
 ![ASK-Logo](images/ask-logo.png)
 
-
 This respository is a component of **[ASK](https://www.praqma.com/services/ask/) Atlassian Software in Kubernetes** ; and holds program-code to create Docker image for Confluence Software (not Confluence Core). 
 
 Although the title says "Atlassian Software in Kubernetes", the container image can be run on plain Docker/Docker-Compose/Docker-Swarm, etc. 
 
-This image can be used to run a single / stand-alone  instance of Confluence Software or a clustered setup known as Confluence DataCenter. You simply need to enable certain environment variables to get that done.
+This image can be used to run a single / stand-alone  instance of Confluence Software, or a clustered setup known as "Confluence DataCenter". You simply need to enable certain environment variables to get that done.
 
 The source-code in this repository is released under MIT License, but the actual docker container images (binaries) built by it are not. You are free to use this source-code to build your own Confluence docker images and host them whereever you want. Please remember to consider various Atlassian and Oracle related lincense limitations when doing so.
 
 ## Description
 
-- Uses Fedora 29 as base image.
+- Uses Fedora 30 as base image.
 - Uses Atlassian Confluence binary installer, which comes with built-in Oracle JDK - Adopt JDK/JRE in the newer installers.
 - Exposes port 8090
 - Supports data center mode and self signed certs.
@@ -47,12 +46,12 @@ docker run \
   --env X_PROXY_PORT="8090" \
   --env X_PROXY_SCHEME="https" \
   --detach \
-  praqma/confluence:6.15.7
+  praqma/confluence:<version-tag>
 ```
 
 **Note:** When setting up Confluence behind a (GCE/AWS/other) proxy/load balancer, make sure to setup proxy/load-balancer timeouts to large values such as 300 secs or more. (The default is set to 60 secs). It is **very** important to setup these timeouts, as Confluence (and other atlassian software) can take significant time setting up initial database. Smaller timeouts will panic Confluence setup process and it will terminate.
 
-If you run without providing any exisiting database, CONFLUENCE will run and will present you with the web-setup wizard:
+If you run without providing any exisiting database, CONFLUENCE will run and will present you with the setup/wizard:
 
 ```shell
 docker run \

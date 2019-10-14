@@ -1,14 +1,61 @@
-# install4j response file for Confluence
+# install4j response file for Confluence 7.0.2
 # Response file location: /opt/atlassian/confluence/.install4j/response.varfile
+# How to customize reponse file: https://confluence.atlassian.com/doc/unattended-installation-838416261.html
 
-launch.application$Boolean=true
-rmiPort$Long=8000
-app.install.service$Boolean=true
+
+# The existingInstallationDir does not need to be enabled on container based systems
+# It is set to /usr/local/Confluence by default, where Confluence is usually "not" installed.
+# I have disabled it - Kamran
 # existingInstallationDir=/usr/local/Confluence
+
+# Determines whether Confluence should be installed as a service.
+app.install.service$Boolean=true
+
+# Determines whether the installer should start Confluence once installation is complete
+launch.application$Boolean=true
+
+# Indicates whether the user running the installer has admin privileges on the machine.
+# The container runs as root while it is installing confluence.
+# At the very end of Docker file the user is switched to user confluence,
+#   which has nothing to do with the installation process anyway.
+# The following should be 'true' on container based systems.
+sys.adminRights$Boolean=true
+
+# Set this to false for a fresh unattended installation. Set to true to perform an unattended upgrade.
+# Always back up your existing site before attempting to upgrade.
+# On container based systems , this will always be set to false, no matter what.
 sys.confirmedUpdateInstallationString=false
+
+# Quite self explanatory :)
 sys.languageId=en
+
+# This is the path to your target installation directory for a new install, 
+#   or existing installation directory to be upgraded.
+# On container based system it will always be a location for a fresh/new install.
 sys.installationDir=/opt/atlassian/confluence
+
+# This is the path to your target local home directory.
 app.confHome=/var/atlassian/application-data/confluence
-executeLauncherAction$Boolean=true
+
+# If portChoice is custom, this sets the HTTP connector port in Tomcat.
 httpPort$Long=8090
+
+# If portChoice is custom, this sets the Tomcat server port.
+rmiPort$Long=8000
+
+# Determines whether Confluence should be installed with default ports.
+# Valid options: default | custom
 portChoice=default
+
+
+
+
+# Note: The following directives were present in Confluence 6.x.x but not found in 7.x.x
+# I have kept them (in disabled state) - for reference. - Kamran
+# executeLauncherAction$Boolean=true
+# It is probably replaced with "launch.application$Boolean=true"
+
+
+
+
+
