@@ -204,8 +204,8 @@ ENV CONFLUENCE_DATACENTER_SHARE /mnt/shared
 
 COPY confluence-response.varfile /tmp/
 
-# ENV CONFLUENCE_DOWNLOAD_LOCATION https://www.atlassian.com/software/confluence/downloads/binary
-ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/confluence
+ENV CONFLUENCE_DOWNLOAD_LOCATION https://www.atlassian.com/software/confluence/downloads/binary
+
 
 RUN  echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/sysconfig/i18n \
   && echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/locale.conf \
