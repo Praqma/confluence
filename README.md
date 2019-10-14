@@ -3,7 +3,7 @@ This respository is a component of **[ASK](https://www.praqma.com/services/ask/)
 
 Although the title says "Atlassian Software in Kubernetes", the container image can be run on plain Docker/Docker-Compose/Docker-Swarm, etc. 
 
-This image can be used to run a single / stand-alone  instance of Confluence Software or a clustered setup known as Confluence DataCenter. You simply need to enable certain environment variables to get that done.
+This image can be used to run a single / stand-alone  instance of Confluence Software, or a clustered setup known as "Confluence DataCenter". You simply need to enable certain environment variables to get that done.
 
 The source-code in this repository is released under MIT License, but the actual docker container images (binaries) built by it are not. You are free to use this source-code to build your own Confluence docker images and host them whereever you want. Please remember to consider various Atlassian and Oracle related lincense limitations when doing so.
 
