@@ -7,7 +7,7 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # * Fedora always has latest packages compared to CentOS.
 # * Fedora does not need extra CentOS's EPEL repositories to install tools.
 
-# **Note:** Fedora runs as 'root', and has '/' as it's default WORKDIR.
+# **Note:** Being an OS image, Fedora runs as 'root'; and has '/' as it's default WORKDIR.
 
 # This Dockerfile builds a container image for Atlassian Confluence, using 
 #   atlassian-confluence-*.bin installer. The advantage of using the bin-installer is
@@ -174,14 +174,6 @@ ENV CONFLUENCE_DATACENTER_SHARE /mnt/shared
 # ------------------------------------------------------------
 # echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/default/locale
 
-# Unattended installation:
-# ------------------------
-# * Reference: https://confluence.atlassian.com/confluence064/installing-confluence-on-linux-720411834.html
-# * Confluence response file is used for unattended installation using bin installer.
-# * On a fresh installation, the response.varfile is found under: /opt/atlassian/confluence/.install4j/response.varfile
-
-COPY confluence-response.varfile /tmp/
-
 # We need the following in the container image:
 # * xmlstarlet to modify XML files.
 # * findutils provide 'find' ,which is helpful in finding files, especially during development and trouble-shooting.
@@ -203,6 +195,14 @@ COPY confluence-response.varfile /tmp/
 # After the installer is finished running, we fix ownership and permissions, such as CONFLUENCE_INSTALL and CONFLUENCE_HOME.
 # The silly syncs are for Dockerhub to process this properly.
 # The fonts are added because AdoptJDK/JRE does not contain fonts and Confluence complaints about it.
+
+# Unattended installation:
+# ------------------------
+# * Reference: https://confluence.atlassian.com/confluence064/installing-confluence-on-linux-720411834.html
+# * Confluence response file is used for unattended installation using bin installer.
+# * On a fresh installation, the response.varfile is found under: /opt/atlassian/confluence/.install4j/response.varfile
+
+COPY confluence-response.varfile /tmp/
 
 # ENV CONFLUENCE_DOWNLOAD_LOCATION https://www.atlassian.com/software/confluence/downloads/binary
 ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/confluence
@@ -248,7 +248,6 @@ RUN  echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/sysconfig/i
 # This also means that you can control the location and name of this file just by controlling this variable.
 # The following is the path inside the container where the plugin file will be mounted.
 ENV PLUGINS_FILE /tmp/confluence-plugins.list
-
 
 # Copy docker-entrypoint.sh to configure server.xml configuration file in order to run the service behind a reverse proxy.
 COPY docker-entrypoint.sh /
