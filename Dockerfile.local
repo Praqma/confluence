@@ -29,7 +29,7 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # ------------------
 # The value for CONFLUENCE_VERSION should be a version number, which is part of the name of the confluence software bin/tarball/zip.
 # ENV CONFLUENCE_VERSION 6.15.4
-ENV CONFLUENCE_VERSION 7.0.2
+ENV CONFLUENCE_VERSION 7.1.0
 
 # OS_USERNAME:
 # -----------
@@ -205,7 +205,11 @@ ENV CONFLUENCE_DATACENTER_SHARE /mnt/shared
 COPY confluence-response.varfile /tmp/
 
 # ENV CONFLUENCE_DOWNLOAD_LOCATION https://www.atlassian.com/software/confluence/downloads/binary
-ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/confluence
+# ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/atlassian
+
+# There is a (containerized) file server on my local/work computer, which runs on dockerhost on port 9999 . 
+# I use that to speed up local container build by avoiding downloading Confluence software repeatedly.
+ENV CONFLUENCE_DOWNLOAD_LOCATION http://172.17.0.1:9999/atlassian
 
 RUN  echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/sysconfig/i18n \
   && echo -e "LANG=\"en_US.UTF-8\" \n LC_ALL=\"en_US.UTF-8\"" > /etc/locale.conf \

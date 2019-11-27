@@ -29,7 +29,7 @@ LABEL maintainer="kaz@praqma.net heh@praqma.net"
 # ------------------
 # The value for CONFLUENCE_VERSION should be a version number, which is part of the name of the confluence software bin/tarball/zip.
 # ENV CONFLUENCE_VERSION 6.15.4
-ENV CONFLUENCE_VERSION 7.0.2
+ENV CONFLUENCE_VERSION 7.1.0
 
 # OS_USERNAME:
 # -----------
