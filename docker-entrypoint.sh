@@ -116,7 +116,7 @@ if [ -n "${X_CONTEXT_PATH}" ]; then
   if [ ! -f ${CONFLUENCE_INSTALL}/.modified.path ]; then
     echo "Modifying server.xml to use context path: '${X_CONTEXT_PATH}' instead of the default '' "
 
-    xmlstarlet ed --inplace --pf --ps --update '//Context/@path' \
+    xmlstarlet ed --inplace --pf --ps --update '//Context[@docBase="../confluence"]/@path' \
       --value "${X_CONTEXT_PATH}" "${CONFLUENCE_INSTALL}/conf/server.xml"
 
     touch ${CONFLUENCE_INSTALL}/.modified.path
